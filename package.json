@@ -2,7 +2,7 @@
   "name": "xdp",
   "displayName": "XDG Desktop Portal",
   "description": "Follow the Linux portals color scheme preference",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "bilelmoussaoui",
   "author": {
     "name": "Bilal Elmoussaoui",
