@@ -1,0 +1,87 @@
+{
+  "name": "xdp",
+  "displayName": "XDG Desktop Portal",
+  "description": "Follow the Linux portals color scheme preference",
+  "version": "0.0.1",
+  "publisher": "bilelmoussaoui",
+  "author": {
+    "name": "Bilal Elmoussaoui",
+    "email": "bil.elmoussaoui@gmail.com"
+  },
+  "license": "MIT",
+  "extensionKind": [
+    "workspace"
+  ],
+  "os": [
+    "linux"
+  ],
+  "engines": {
+    "vscode": "^1.89.0"
+  },
+  "categories": [
+    "Themes",
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "Color Scheme",
+      "properties": {
+        "xdp.color-scheme": {
+          "type": "boolean",
+          "default": false,
+          "title": "Color Scheme",
+          "description": "Whether to listen to color-scheme changes."
+        },
+        "xdp.color-scheme-light": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null,
+          "title": "Light color scheme theme",
+          "description": "Theme to match light color scheme."
+        },
+        "xdp.color-scheme-dark": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null,
+          "title": "Dark color scheme theme",
+          "description": "Theme to match dark color scheme."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "yarn run compile && yarn run lint",
+    "lint": "eslint src --ext ts",
+    "deploy-vs": "vsce publish --yarn",
+    "deploy-ovsx": "ovsx publish --yarn"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.89.0",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
+    "@vscode/test-electron": "^2.3.0",
+    "eslint": "^8.36.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "ovsx": "^0.9.1",
+    "typescript": "^4.9.5",
+    "vsce": "^2.15.0"
+  },
+  "dependencies": {
+    "dbus-next": "^0.10.2"
+  }
+}
