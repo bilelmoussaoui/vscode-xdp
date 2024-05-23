@@ -32,9 +32,11 @@ class Extension {
 	private iface: dbus.ClientInterface | null;
 	private isColorSchemeWatched: boolean;
 	private ifaceVersion: number;
+	private extCtx: vscode.ExtensionContext;
 
-	constructor() {
+	constructor(extCtx: vscode.ExtensionContext) {
 		this.bus = dbus.sessionBus();
+		this.extCtx = extCtx;
 		this.iface = null;
 		this.ifaceVersion = 0;
 		this._colorScheme = ColorScheme.noPreference;
@@ -69,8 +71,9 @@ class Extension {
 	}
 
 	async setup(): Promise<void> {
+		console.log('Running setup');
 		const obj = await this.bus.getProxyObject('org.freedesktop.portal.Desktop', '/org/freedesktop/portal/desktop');
-
+		console.log('Getting properties');
 		const properties = obj.getInterface('org.freedesktop.DBus.Properties');
 		this.ifaceVersion = (await properties.Get('org.freedesktop.portal.Settings', 'version') as dbus.Variant).value as number;
 		console.log(`Settings iface version: ${this.ifaceVersion}`);
@@ -110,9 +113,9 @@ class Extension {
 }
 
 
-export async function activate() {
-	const extension = new Extension();
+export async function activate(extCtx: vscode.ExtensionContext): Promise<void> {
+	const extension = new Extension(extCtx);
 	await extension.setup();
 }
 
-export function deactivate() {}
+export async function deactivate(): Promise<void> {}
